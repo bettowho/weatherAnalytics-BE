@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WeatherAnalytycs.Modules.HistoricalData\WeatherAnalytycs.Modules.HistoricalData.csproj" />
+    <ProjectReference Include="..\WeatherAnalytics.Modules.HistoricalData\WeatherAnalytics.Modules.HistoricalData.csproj" />
   </ItemGroup>
 
 </Project>
