@@ -1,6 +1,6 @@
-namespace weather_analytics_BE
+namespace WeatherAnalytics
 {
-    public class WeatherForecast
+    public class HistoricalData
     {
         public DateTime Date { get; set; }
 

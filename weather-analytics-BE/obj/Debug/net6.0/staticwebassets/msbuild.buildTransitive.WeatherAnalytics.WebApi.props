@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\WeatherAnalytics.WebApi.props" />
+</Project>
