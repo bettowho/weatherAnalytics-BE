@@ -10,5 +10,5 @@ public static class ProductModuleServiceCollectionExtensions
     public static IMvcBuilder AddHistoricalDataModule(this IMvcBuilder builder)
     {
         return builder.AddApplicationPart(Assembly.GetExecutingAssembly());
-    }   
+    }
 }

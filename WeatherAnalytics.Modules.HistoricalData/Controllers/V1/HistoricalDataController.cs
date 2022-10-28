@@ -1,3 +1,7 @@
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
+using System;
+
 namespace WeatherAnalytics.Controllers.V1
 {
     [Produces("application/json")]
@@ -5,22 +9,42 @@ namespace WeatherAnalytics.Controllers.V1
     [ApiVersion("1.0")]
     public class HistoricalDataController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private static readonly HttpClient client = new();
+        public HistoricalDataController()
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        }
 
+        /// <summary>
+        ///  Get all historic weather data in a specific location in a range of dates with a granularity of an hour. It uses Europe/Berlin timezone.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route(ApiRoutes.Polizze.GetAll)]
-        public IEnumerable<HistoricalData> Get()
+        public async Task<ActionResult<HistoricalData>> Get([FromQuery]HistoricalDataRequest request)
         {
-            return Enumerable.Range(1, 5).Select(index => new HistoricalData
+            try
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                string url = $"{Globals.OpenMeteoApiUrl}{request.Version}/era5?latitude={request.Latitude}&longitude={request.Longitude}&start_date={request.StartDate.ToString("yyyy-MM-dd")}&end_date={request.EndDate.ToString("yyyy-MM-dd")}&hourly=temperature_2m&timezone={request.Timezone}";
+                var historicalData = new HistoricalData();
+                using (var httpClient = new HttpClient())
+                {
+                    using (var response = await httpClient.GetAsync(url))
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var result = await response.Content.ReadAsStringAsync();
+                            historicalData = JsonConvert.DeserializeObject<HistoricalData>(result);
+                            return Ok(historicalData);
+                        }
+                        else return BadRequest();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
