@@ -1,6 +1,4 @@
-using System.Text.Json.Serialization;
-
-namespace WeatherAnalytics
+namespace WeatherAnalytics.Modules.HistoricalData.Entities
 {
     public class HistoricalDataRequest
     {

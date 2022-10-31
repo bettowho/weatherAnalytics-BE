@@ -6,3 +6,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using WeatherAnalytics.Modules.HistoricalData.V1;
 global using WeatherAnalytics.Domain;
 global using Newtonsoft.Json;
+using WeatherAnalytics.Modules.HistoricalData.Entities;
+using WeatherAnalytics.Modules.HistoricalData.Services;

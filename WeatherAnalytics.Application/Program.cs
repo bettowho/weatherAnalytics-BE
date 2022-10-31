@@ -1,3 +1,5 @@
+using WeatherAnalytics.Modules.HistoricalData.Services;
+
 var cultureInfo = new CultureInfo("en-US");
 
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -6,10 +8,10 @@ CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 // Add services to the container.
-
 services.AddControllers()
     .AddHistoricalDataModule();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddApiVersioning(options =>

@@ -1,6 +1,4 @@
-using System.Text.Json.Serialization;
-
-namespace WeatherAnalytics
+namespace WeatherAnalytics.Modules.HistoricalData.Entities
 {
     public class HistoricalData
     {
@@ -18,7 +16,7 @@ namespace WeatherAnalytics
     public class TemperatureMeasurement
     {
         public List<DateTime> Time { get; set; }
-        public List<double> Temperature_2m { get; set; }
+        public List<double?> Temperature_2m { get; set; }
     }
     public class TemperatureUnit
     {
