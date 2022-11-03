@@ -1,5 +1,3 @@
-using WeatherAnalytics.Modules.HistoricalData.Services;
-
 var cultureInfo = new CultureInfo("en-US");
 
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -23,7 +21,7 @@ services.AddApiVersioning(options =>
 services.AddCors(options =>
 {
     options.AddPolicy("AllowedOrigins", builder => builder
-        .WithOrigins()
+        .AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader());
 
